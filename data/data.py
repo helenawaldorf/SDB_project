@@ -12,6 +12,10 @@ for column in berlin_demo_data.select_dtypes(include=['object']).columns:
 for column in berlin_employ_data.select_dtypes(include=['object']).columns:
     berlin_employ_data[column] = berlin_employ_data[column].str.replace(',', '.')
 
+merged_berlin_data = pd.merge(berlin_demo_data, berlin_employ_data, on = 'district_name', how ='inner')
+    
+    
+
 berlin_demo_data.to_csv('preprocessed_data/berlin_districts_demographics_translated_modified.csv', index=False)
 berlin_employ_data.to_csv('preprocessed_data/berlin_districts_employment_translated_modified.csv', index=False)
 
