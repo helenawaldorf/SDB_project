@@ -1,0 +1,13 @@
+﻿district_name,population,population_age_under_18_count,population_age_65+_count,population_age_under_18_percentage,population_age_65+_percentage,population_migration_background_count,population_migration_background_percentage
+Mitte,397134,60390,50840,"15,2","12,8",228258,"57,5"
+Friedrichshain-Kreuzberg,293454,43970,31338,"15,0","10,7",142641,"48,6"
+Pankow,424307,73424,62577,"17,3","14,7",121077,"28,5"
+Charlottenburg-Wilmersdorf,343081,47384,78768,"13,8","23,0",155359,"45,3"
+Spandau,257091,47164,53275,"18,3","20,7",112550,"43,8"
+Steglitz-Zehlendorf,310446,48671,79143,"15,7","25,5",99480,32
+Tempelhof-Schöneberg,355868,55861,74634,"15,7","21,0",147362,"41,4"
+Neukölln,330017,53919,57173,"16,3","17,3",165948,"50,3"
+Treptow-Köpenick,294081,48255,59916,"16,4","20,4",70981,"24,1"
+Marzahn-Hellersdorf,291948,53843,62776,"18,4","21,5",81491,"27,9"
+Lichtenberg,311881,54735,58480,"17,5","18,8",108019,"34,6"
+Reinickendorf,268792,45866,61837,"17,1","23,0",104778,39
