@@ -1,0 +1,13 @@
+district_name,population,population_age_under_18_count,population_age_65+_count,population_age_under_18_percentage,population_age_65+_percentage,population_migration_background_count,population_migration_background_percentage,unemployment_percentage,youth_unemployment_percentage,communities_of_need_percentage,communities_of_need_under_15_percentage,grundsicherung_65+_percentage
+Mitte,397134,60390,50840,15.2,12.8,228258,57.5,5.2,3.1,18.2,33.5,13.4
+Friedrichshain-Kreuzberg,293454,43970,31338,15.0,10.7,142641,48.6,4.5,3.2,14.4,23.5,13.2
+Pankow,424307,73424,62577,17.3,14.7,121077,28.5,3.1,1.5,8.0,11.1,3.5
+Charlottenburg-Wilmersdorf,343081,47384,78768,13.8,23.0,155359,45.3,3.8,1.6,10.5,17.3,8.7
+Spandau,257091,47164,53275,18.3,20.7,112550,43.8,5.8,3.9,20.6,33.6,7.0
+Steglitz-Zehlendorf,310446,48671,79143,15.7,25.5,99480,32,2.5,1.1,7.5,11.3,4.0
+Tempelhof-Schöneberg,355868,55861,74634,15.7,21.0,147362,41.4,4.5,2.6,14.6,23.9,8.0
+Neukölln,330017,53919,57173,16.3,17.3,165948,50.3,7.0,4.9,21.3,36.5,10.3
+Treptow-Köpenick,294081,48255,59916,16.4,20.4,70981,24.1,3.8,2.0,11.5,18.5,2.4
+Marzahn-Hellersdorf,291948,53843,62776,18.4,21.5,81491,27.9,4.5,3.0,16.1,26.3,4.2
+Lichtenberg,311881,54735,58480,17.5,18.8,108019,34.6,5.0,2.9,15.6,26.2,4.2
+Reinickendorf,268792,45866,61837,17.1,23.0,104778,39,5.2,3.0,18.5,30.9,5.3
