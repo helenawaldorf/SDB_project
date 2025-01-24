@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://codepen.io/chriddyp/pen/bWLwgP.css"/>
+</head>
+<body>
+
+    <div style="text-align: center; font-size: 40px; font-weight: bold; margin-bottom: 20px;">
+        Socio-Economic Comparison of Districts in Berlin and Hamburg
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        <div style="flex: 0 0 20%; text-align: left; font-size: 30px; font-weight: bold;">Berlin</div>
+        <div style="flex: 0 0 58%; text-align: left; font-size: 30px; font-weight: bold;">Hamburg</div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; height: 80vh;">
+
+        <!-- Map Container (2 maps side-by-side) -->
+        <div style="display: flex; justify-content: space-between; width: calc(100% - 250px);"> <!-- Reduced width for space on the right -->
+            <!-- Berlin Map -->
+            <iframe src="berlin_population_unemployment_map.html" style="width: 48%; height: 100%; border: none;" frameborder="0"></iframe>
+            
+            <!-- Hamburg Map -->
+            <iframe src="hamburg_population_unemployment_map.html" style="width: 48%; height: 100%; border: none;" frameborder="0"></iframe>
+        </div>
+
+        <!-- Legend (Fixed to the right side) -->
+        <div style="position: fixed; right: 30px; bottom: 180px; width: 200px; background-color: white; border: 2px solid grey; padding: 10px; font-size: 14px; border-radius: 5px;">
+            <b>Unemployment Rate %<br>(15-65 years)</b><br>
+            
+            <!-- Legend for Unemployment Bins -->
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #ffffd9; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">2.5% - 3.2%</span> 
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #edf8b1; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">3.3% - 3.9%</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #c7e9b4; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">4.0% - 4.6%</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #7fcdbb; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">4.7% - 5.3%</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #41b6c4; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">5.4% - 6.0%</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #1d91c0; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">6.1% - 6.7%</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #225ea8; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">6.8% - 7.4%</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #0c2c84; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">7.5% - 8.2%</span>
+            </div>
+        
+        <div style="position: fixed; right: 30px; bottom: 30px; width: 200px; background-color: white; border: 2px solid grey; padding: 10px; font-size: 14px; border-radius: 5px;">
+            <b>Educational Institutions</b><br>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #8ACEF5; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">Kindergarten</span> 
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #F37A0F; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">School</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="background-color: #CBE896; width: 15px; height: 15px; border-radius: 50%; border: 0.5px solid black;"></div>
+                <span style="margin-left: 10px;">College</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
