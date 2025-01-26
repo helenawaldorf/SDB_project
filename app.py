@@ -212,7 +212,7 @@ population_choropleth = folium.Choropleth(
     data = gdf_berlin,
     columns = ['district_name', 'population'],
     key_on = 'feature.properties.district_name',
-    fill_color = 'YlOrRd',  
+    fill_color = 'Purples',  
     fill_opacity = 0.5,
     line_opacity = 0.2,
     legend_name = 'Population'
@@ -231,39 +231,54 @@ unemployment_choropleth_berlin = folium.Choropleth(
     fill_color='YlGnBu',  
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name='Unemployment rate % (15-65 years)',
     bins=unemployment_rate_bins,
-    reset=True
+    legend_name=None,  
+    show_legend = False  
+    
 ).add_to(m_berlin)
 
+for child in unemployment_choropleth_berlin._children:
+        if child.startswith("color_map"):
+            del unemployment_choropleth_berlin._children[child]
+
+
+population_under_18_rate_bins = np.linspace(13.8, 18.8, 7) 
 
 # choropleth for population under 18 
-population_under_18_chrpleth = folium.Choropleth(
+population_under_18_chloropleth = folium.Choropleth(
     geo_data=geojson_berlin,
     show=False,
     name='Population % (< 18 years)',
     data=gdf_berlin,
     columns=['district_name', 'population_age_under_18_percentage'],
     key_on='feature.properties.district_name',
-    fill_color='YlGnBu',  #
-    fill_opacity=0.7,
-    line_opacity=0.2,
-    legend_name = 'Population % (< 18 years)'
-).add_to(m_berlin)
-
-# choropleth for population 65+
-population_65plus_choropleth = folium.Choropleth(
-    geo_data=geojson_berlin,
-    show=False,
-    name='Population % (> 65 years)',
-    data=gdf_berlin,
-    columns=['district_name', 'population_age_65_plus_percentage'],
-    key_on='feature.properties.district_name',
+    bins = population_under_18_rate_bins,
     fill_color='YlOrRd',  
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name='Population % (> 65 years)'
+    legend_name=None,  
+    show_legend = False 
 ).add_to(m_berlin)
+
+for child in population_under_18_chloropleth._children:
+       if child.startswith("color_map"):
+           del population_under_18_chloropleth._children[child]
+
+# choropleth for population 65+
+# population_65plus_choropleth = folium.Choropleth(
+#     geo_data=geojson_berlin,
+#     show=False,
+#     name='Population % (> 65 years)',
+#     data=gdf_berlin,
+#     columns=['district_name', 'population_age_65_plus_percentage'],
+#     key_on='feature.properties.district_name',
+#     fill_color='YlOrRd',  
+#     fill_opacity=0.7,
+#     line_opacity=0.2,
+#     legend_name='Population % (> 65 years)'
+# ).add_to(m_berlin)
+
+youth_unemployment_rate_bins_rate_bins = np.linspace(1.1, 4.9, 8) 
 
 # choropleth for youth unemployment rate
 youth_unemployment_choropleth = folium.Choropleth(
@@ -273,11 +288,16 @@ youth_unemployment_choropleth = folium.Choropleth(
     data=gdf_berlin,
     columns=['district_name', 'youth_unemployment_percentage'],
     key_on='feature.properties.district_name',
-    fill_color='YlOrRd',  
+    fill_color='PuRd',  
     fill_opacity=0.7,
     line_opacity=0.2,
+    bins = youth_unemployment_rate_bins_rate_bins, 
     legend_name = 'Unemployment rate % (15-25 years)'
 ).add_to(m_berlin)
+
+for child in youth_unemployment_choropleth._children:
+       if child.startswith("color_map"):
+           del youth_unemployment_choropleth._children[child]
 
 
 # add education points 
@@ -466,7 +486,7 @@ geojson_hamburg = gdf_hamburg.to_json()
 # districts with data information
 GeoJson(
     geojson_hamburg,  
-    name='hamburg Districts',
+    name='Hamburg Districts',
     style_function=style_function_district,
     tooltip=folium.GeoJsonTooltip(
         fields=[
@@ -521,7 +541,7 @@ population_choropleth = folium.Choropleth(
     data=gdf_hamburg,
     columns=['district_name', 'population'],
     key_on='feature.properties.district_name',
-    fill_color='YlGnBu',  
+    fill_color='Purples',  
     fill_opacity=0.5,
     line_opacity=0.5,
     legend_name='Population',
@@ -531,45 +551,56 @@ population_choropleth = folium.Choropleth(
 unemployment_choropleth = folium.Choropleth(
     geo_data=geojson_hamburg,
     show=False,
-    name = 'Unemployment rate % (15-65 years)',
-    data = gdf_hamburg,
-    columns = ['district_name', 'unemployment'],
-    key_on = 'feature.properties.district_name',
-    bins = unemployment_rate_bins,
+    name='Unemployment rate % (15-65 years)',
+    data=gdf_hamburg,
+    columns=['district_name', 'unemployment'],
+    key_on='feature.properties.district_name',
+    bins=unemployment_rate_bins,
     fill_color='YlGnBu',  
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name='Unemployment rate % (15-65 years)',
+    legend_name=None,  
+    show_legend = False  
 ).add_to(m_hamburg)
+
+for child in unemployment_choropleth._children:
+        if child.startswith("color_map"):
+            del unemployment_choropleth._children[child]
 
 
 # choropleth for population under 18 
-population_under_18_choropleth = folium.Choropleth(
+population_under_18_chloropleth = folium.Choropleth(
     geo_data=geojson_hamburg,
     show=False,
     name='Population % (< 18 years)',
     data=gdf_hamburg,
     columns=['district_name', 'population_age_under_18_percentage'],
     key_on='feature.properties.district_name',
-    fill_color='YlGnBu',  #
+    fill_color='YlOrRd', 
+    bins = population_under_18_rate_bins,
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name = 'Population % (< 18 years)'
+    legend_name = None,  
+    show_legend = False 
 ).add_to(m_hamburg)
 
+for child in population_under_18_chloropleth._children:
+       if child.startswith("color_map"):
+           del population_under_18_chloropleth._children[child]
+
 # choropleth for population 65+ 
-population_65plus_choropleth = folium.Choropleth(
-    geo_data=geojson_hamburg,
-    show=False,
-    name='Population % (> 65 years)',
-    data=gdf_hamburg,
-    columns=['district_name', 'population_age_65_plus_percentage'],
-    key_on='feature.properties.district_name',
-    fill_color='YlOrRd',  
-    fill_opacity=0.7,
-    line_opacity=0.2,
-    legend_name='Population % (> 65 years)'
-).add_to(m_hamburg)
+# population_65plus_choropleth = folium.Choropleth(
+#     geo_data=geojson_hamburg,
+#     show=False,
+#     name='Population % (> 65 years)',
+#     data=gdf_hamburg,
+#     columns=['district_name', 'population_age_65_plus_percentage'],
+#     key_on='feature.properties.district_name',
+#     fill_color='YlOrRd',  
+#     fill_opacity=0.7,
+#     line_opacity=0.2,
+#     legend_name='Population % (> 65 years)'
+# ).add_to(m_hamburg)
 
 # choropleth for youth unemployment rate
 youth_unemployment_choropleth = folium.Choropleth(
@@ -579,11 +610,16 @@ youth_unemployment_choropleth = folium.Choropleth(
     data=gdf_hamburg,
     columns=['district_name', 'youth_unemployment_percentage'],
     key_on='feature.properties.district_name',
-    fill_color='YlOrRd',  
+    fill_color='PuRd',  
     fill_opacity=0.7,
     line_opacity=0.2,
+    bins = youth_unemployment_rate_bins_rate_bins, 
     legend_name = 'Unemployment rate % (15-25 years)'
 ).add_to(m_hamburg)
+
+for child in youth_unemployment_choropleth._children:
+       if child.startswith("color_map"):
+           del youth_unemployment_choropleth._children[child]
 
 
 # add education points 
