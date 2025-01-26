@@ -1,22 +1,11 @@
-import pandas as pd
 import geopandas as gpd
 import numpy as np
-import geojson
 import json
-from shapely import wkb
-from shapely.geometry import mapping
 from shapely.geometry import shape
 from db_connect.connect import connect 
-import matplotlib.pyplot as plt
 import folium
-from folium import GeoJson, Choropleth
+from folium import GeoJson
 from folium.features import DivIcon
-from folium import CircleMarker
-from folium import FeatureGroup
-from folium.plugins import MarkerCluster
-from folium.map import LayerControl
-from folium import LinearColormap
-import branca.colormap as cm
 
 
 
@@ -58,7 +47,7 @@ if raw_data_pois_berlin[1]:
 df_pois_berlin["geometry"] = [shape(json.loads(geojson)) for geojson in df_pois_berlin["geojson"]]
 gdf_pois_berlin = gpd.GeoDataFrame(df_pois_berlin, geometry="geometry") 
 gdf_pois_berlin = gdf_pois_berlin.set_crs("EPSG:4326")
-gdf_pois_berlin.to_file("gdf_pois_berlin.geojson", driver="GeoJSON")
+gdf_pois_berlin.to_file("query_geojson/gdf_pois_berlin.geojson", driver="GeoJSON")
 
 # data: district geometry merged with district information and count of education access within district 
 query_berlin = """
@@ -146,7 +135,7 @@ if raw_data_berlin[1]:
 df_berlin["geometry"] = [shape(json.loads(geojson)) for geojson in df_berlin["geojson"]]
 gdf_berlin = gpd.GeoDataFrame(df_berlin, geometry="geometry") # create a GeoDataFrame 
 gdf_berlin = gdf_berlin.set_crs("EPSG:4326")
-gdf_berlin.to_file("gdf_berlin.geojson", driver="GeoJSON")
+gdf_berlin.to_file("query_geojson/gdf_berlin.geojson", driver="GeoJSON")
 
 # VISUALIZATION  ----------------------------------------------------------------------------------------------------
 
@@ -164,7 +153,6 @@ def style_function_district(feature):
         'weight': 0.5,  
         'opacity': 1
     }
-
 
 # districts with data information
 folium.GeoJson(
@@ -305,7 +293,7 @@ fclass_color_map = {
 
 
 def get_poi_color(fclass):
-    return fclass_color_map.get(fclass, 'gray')  # default to gray if not found
+    return fclass_color_map.get(fclass, 'gray')  
 
 # for each POI category: layer 
 poi_layers = {}
@@ -322,8 +310,7 @@ for _, poi in gdf_pois_berlin.iterrows():
     # marker with a DivIcon
     marker = folium.Marker(
         location=[lat, lon],
-        icon=poi_icon #,
-       #tooltip=folium.Tooltip(f'{poi["fclass"]} POI')  # Tooltip with POI type
+        icon=poi_icon 
     )
     
     if poi['fclass'] not in poi_layers:
@@ -336,14 +323,13 @@ for layer in poi_layers.values():
 # Layer Control: toggling layers
 folium.LayerControl().add_to(m_berlin)
 
-m_berlin.save('berlin_population_unemployment_map.html')
+m_berlin.save('web_application/berlin_population_unemployment_map.html')
 
 
 
 
 
 # Hamburg district geometry merged with district information
-
 query_pois_hamburg = """
 SELECT 
     id, 
@@ -376,7 +362,7 @@ if raw_data_pois_hamburg[1]:
 df_pois_hamburg["geometry"] = [shape(json.loads(geojson)) for geojson in df_pois_hamburg["geojson"]]
 gdf_pois_hamburg = gpd.GeoDataFrame(df_pois_hamburg, geometry="geometry") 
 gdf_pois_hamburg = gdf_pois_hamburg.set_crs("EPSG:4326")
-gdf_pois_hamburg.to_file("gdf_pois_hamburg.geojson", driver="GeoJSON")
+gdf_pois_hamburg.to_file("query_geojson/gdf_pois_hamburg.geojson", driver="GeoJSON")
 
 query_hamburg = """
 SELECT 
@@ -466,7 +452,7 @@ df_hamburg["geometry"] = [shape(json.loads(geojson)) for geojson in df_hamburg["
 gdf_hamburg = gpd.GeoDataFrame(df_hamburg, geometry="geometry") 
 
 gdf_hamburg = gdf_hamburg.set_crs("EPSG:4326")
-gdf_hamburg.to_file("gdf_hamburg.geojson", driver="GeoJSON")
+gdf_hamburg.to_file("query_geojson/gdf_hamburg.geojson", driver="GeoJSON")
 
 
 # VISUALIZATION  ----------------------------------------------------------------------------------------------------
@@ -617,8 +603,7 @@ for _, poi in gdf_pois_hamburg.iterrows():
     )
     marker = folium.Marker(
         location=[lat, lon],
-        icon=poi_icon #,
-       #tooltip=folium.Tooltip(f'{poi["fclass"]} POI')  # Tooltip with POI type
+        icon=poi_icon 
     )
 
     if poi['fclass'] not in poi_layers:
@@ -632,4 +617,4 @@ for layer in poi_layers.values():
 
 folium.LayerControl().add_to(m_hamburg)
 
-m_hamburg.save('hamburg_population_unemployment_map.html')
+m_hamburg.save('web_application/hamburg_population_unemployment_map.html')

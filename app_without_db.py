@@ -1,22 +1,9 @@
-import pandas as pd
 import geopandas as gpd
 import numpy as np
-import geojson
-import json
-from shapely import wkb
-from shapely.geometry import mapping
-from shapely.geometry import shape
-from db_connect.connect import connect 
-import matplotlib.pyplot as plt
 import folium
-from folium import GeoJson, Choropleth
+from folium import GeoJson
 from folium.features import DivIcon
-from folium import CircleMarker
-from folium import FeatureGroup
-from folium.plugins import MarkerCluster
-from folium.map import LayerControl
-from folium import LinearColormap
-import branca.colormap as cm
+
 
 # VISUALIZATION  ----------------------------------------------------------------------------------------------------
 
@@ -24,7 +11,7 @@ import branca.colormap as cm
 m_berlin = folium.Map(location = [52.520008, 13.404954], zoom_start = 10, # map centered on Berlin
                 tiles = "CartoDB positron")
 
-geojson_berlin = gpd.read_file("gdf_berlin.geojson")
+geojson_berlin = gpd.read_file("query_geojson/gdf_berlin.geojson")
 # style function for the districts: no fill
 def style_function_district(feature):
     return {
@@ -162,8 +149,8 @@ youth_unemployment_choropleth = folium.Choropleth(
 
 
 # add education points 
- # convert POI GeoDataFrame to GeoJSON
-geojson_pois_berlin = gpd.read_file("gdf_pois_berlin.geojson")
+# convert POI GeoDataFrame to GeoJSON
+geojson_pois_berlin = gpd.read_file("query_geojson/gdf_pois_berlin.geojson")
 # color mapping for `fclass` 
 fclass_color_map = {
     'college': '#CBE896',
@@ -174,13 +161,13 @@ fclass_color_map = {
 
 
 def get_poi_color(fclass):
-    return fclass_color_map.get(fclass, 'gray')  # default to gray if not found
+    return fclass_color_map.get(fclass, 'gray')  
 
 # for each POI category: layer 
 poi_layers = {}
 for _, poi in geojson_pois_berlin.iterrows():
-    lat, lon = poi.geometry.y, poi.geometry.x  # latitude and longitude of the POI
-    color = get_poi_color(poi['fclass'])  # color based on the `fclass`
+    lat, lon = poi.geometry.y, poi.geometry.x  
+    color = get_poi_color(poi['fclass'])  
     # DivIcon for each POI (colored dot)
     poi_icon = DivIcon(
         icon_size=(5, 5),  
@@ -191,8 +178,7 @@ for _, poi in geojson_pois_berlin.iterrows():
     # marker with a DivIcon
     marker = folium.Marker(
         location=[lat, lon],
-        icon=poi_icon #,
-       #tooltip=folium.Tooltip(f'{poi["fclass"]} POI')  # Tooltip with POI type
+        icon=poi_icon 
     )
     
     if poi['fclass'] not in poi_layers:
@@ -205,7 +191,7 @@ for layer in poi_layers.values():
 # Layer Control: toggling layers
 folium.LayerControl().add_to(m_berlin)
 
-m_berlin.save('berlin_population_unemployment_map.html')
+m_berlin.save('web_application/berlin_population_unemployment_map.html')
 
 
 
@@ -214,7 +200,7 @@ m_berlin.save('berlin_population_unemployment_map.html')
 m_hamburg = folium.Map(location=[53.5511, 9.9937], zoom_start=10, 
                tiles="CartoDB positron") # map centered on hamburg
 
-geojson_hamburg = gpd.read_file("gdf_hamburg.geojson")
+geojson_hamburg = gpd.read_file("query_geojson/gdf_hamburg.geojson")
 
 
 # districts with data information
@@ -341,7 +327,7 @@ youth_unemployment_choropleth = folium.Choropleth(
 
 
 # add education points 
-geojson_pois_hamburg = gpd.read_file("gdf_pois_hamburg.geojson")
+geojson_pois_hamburg = gpd.read_file("query_geojson/gdf_pois_hamburg.geojson")
 
 
 poi_layers = {}
@@ -356,8 +342,7 @@ for _, poi in geojson_pois_hamburg.iterrows():
     )
     marker = folium.Marker(
         location=[lat, lon],
-        icon=poi_icon #,
-       #tooltip=folium.Tooltip(f'{poi["fclass"]} POI')  # Tooltip with POI type
+        icon=poi_icon 
     )
 
     if poi['fclass'] not in poi_layers:
@@ -371,4 +356,4 @@ for layer in poi_layers.values():
 
 folium.LayerControl().add_to(m_hamburg)
 
-m_hamburg.save('hamburg_population_unemployment_map.html')
+m_hamburg.save('web_application/hamburg_population_unemployment_map.html')
